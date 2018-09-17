@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/home"
+        android:title="@string/nav_home" />
+    <item
+        android:id="@+id/nav_library"
+        android:icon="@drawable/library_books"
+        android:title="@string/nav_library" />
+    <item android:title="Slot 3" />
+    <item android:title="Slot 4" />
+</menu>
