@@ -27,8 +27,6 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/main_nav"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp">
-
-    </FrameLayout>
+        tools:layout_editor_absoluteX="1dp"/>
 
 </android.support.constraint.ConstraintLayout>
