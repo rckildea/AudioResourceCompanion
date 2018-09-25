@@ -1,8 +1,10 @@
 package kildea.audioresourcecompanion;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +21,11 @@ public class LibraryFragment extends Fragment {
 
     int[] IMAGES = {R.drawable.person, R.drawable.album, R.drawable.music_note};
     String[] CATEGORIES = {"Artists", "Albums", "Songs"};
+    Fragment[] CATEGORY_FRAGMENTS = {new ArtistViewFragment(), new ArtistViewFragment(), new ArtistViewFragment()};
+    Library library = new Library();
 
     public LibraryFragment() {
+        getUserLibrary();
         // Required empty public constructor
     }
 
@@ -29,12 +34,16 @@ public class LibraryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library, container, false);
-        ListView librayList = view.findViewById(R.id.library_list);
+        ListView libraryActionList = view.findViewById(R.id.library_action_list);
         CustomAdapter customAdapter = new CustomAdapter();
 
-        librayList.setAdapter(customAdapter);
+        libraryActionList.setAdapter(customAdapter);
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void getUserLibrary() {
+
     }
 
 
@@ -56,13 +65,23 @@ public class LibraryFragment extends Fragment {
         }
 
         @Override
-        public View getView(int position, View view, ViewGroup parent) {
+        public View getView(final int position, View view, ViewGroup parent) {
             view = getLayoutInflater().inflate(R.layout.library_menu, null);
             ImageView imageView = view.findViewById(R.id.library_symbol);
             TextView textView = view.findViewById(R.id.library_categories);
 
             imageView.setImageResource(IMAGES[position]);
             textView.setText(CATEGORIES[position]);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.main_frame, CATEGORY_FRAGMENTS[position]);
+                    fragmentTransaction.commit();
+                }
+            });
+
             return view;
         }
     }
