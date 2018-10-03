@@ -21,18 +21,16 @@ public class LibraryFragment extends Fragment {
 
     int[] IMAGES = {R.drawable.person, R.drawable.album, R.drawable.music_note};
     String[] CATEGORIES = {"Artists", "Albums", "Songs"};
-    Fragment[] CATEGORY_FRAGMENTS = {new ArtistViewFragment(), new ArtistViewFragment(), new ArtistViewFragment()};
-    Library library = new Library();
+    Fragment[] CATEGORY_FRAGMENTS = {new ArtistViewFragment(), new ArtistViewFragment(), new SongViewFragment()};
 
     public LibraryFragment() {
-        getUserLibrary();
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         ListView libraryActionList = view.findViewById(R.id.library_action_list);
         CustomAdapter customAdapter = new CustomAdapter();
@@ -40,10 +38,6 @@ public class LibraryFragment extends Fragment {
         libraryActionList.setAdapter(customAdapter);
         // Inflate the layout for this fragment
         return view;
-    }
-
-    public void getUserLibrary() {
-
     }
 
 

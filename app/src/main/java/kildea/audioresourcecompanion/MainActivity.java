@@ -7,7 +7,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,17 +23,23 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private LibraryFragment libraryFragment;
 
+    protected static Library library;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        library = new Library();
         mainNav = findViewById(R.id.main_nav);
         mainFrame = findViewById(R.id.main_frame);
 
         homeFragment = new HomeFragment();
         setActiveFragment(homeFragment); // Set initial screen to home screen
         libraryFragment = new LibraryFragment();
+
+        //save_test();
 
         mainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -51,4 +63,33 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_frame, fragment);
         fragmentTransaction.commit();
     }
+
+    /*public void save_test() {
+        String text = "abcdefgh";
+        FileOutputStream fos = null;
+        File abc = new File("abc.txt");
+        if (!abc.exists()) {
+            try {
+                abc.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            fos = openFileOutput("abc.txt", MODE_PRIVATE);
+            fos.write(text.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }*/
 }
