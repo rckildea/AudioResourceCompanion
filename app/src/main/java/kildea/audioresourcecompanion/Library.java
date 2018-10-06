@@ -34,7 +34,7 @@ public class Library {
         File[] music_files = music_folder.listFiles();
 
         for (File f : music_files) {
-            if (FilenameUtils.getExtension(f.getPath()).equals("mp3")) {
+            if (FilenameUtils.getExtension(f.getPath()).equalsIgnoreCase("mp3")) {
                 try {
                     Mp3File temp = new Mp3File(f.getPath());
                     createId3v2Tag(temp);

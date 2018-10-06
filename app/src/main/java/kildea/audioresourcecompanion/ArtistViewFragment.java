@@ -42,10 +42,10 @@ public class ArtistViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /*artists.add("La Dispute");
+        artists.add("La Dispute");
         artists.add("The Wonder Years");
         images.add(R.drawable.testband1);
-        images.add(R.drawable.testband2);*/
+        images.add(R.drawable.testband2);
 
         View view = inflater.inflate(R.layout.fragment_artist_view, container, false);
 

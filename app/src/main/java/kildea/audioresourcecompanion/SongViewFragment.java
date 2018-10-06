@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,11 +40,12 @@ public class SongViewFragment extends Fragment {
 
         songs = MainActivity.library.collection;
 
+        ListView column_listview = view.findViewById(R.id.column_headers);
         ListView song_listview = view.findViewById(R.id.song_list);
 
-        SongListAdapter songListAdapter = new SongListAdapter();
+        column_listview.setAdapter(new ColumnHeaderAdapter());
 
-        song_listview.setAdapter(songListAdapter);
+        song_listview.setAdapter(new SongListAdapter());
 
         return view;
 
@@ -84,6 +86,43 @@ public class SongViewFragment extends Fragment {
                     ah.playTrack(songs.get(position));
                 }
             });
+
+            return view;
+        }
+    }
+
+    class ColumnHeaderAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return 1;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public boolean isEnabled(int position) {
+            return false;
+        }
+
+        @Override
+        public View getView(final int position, View view, ViewGroup parent) {
+            view = getLayoutInflater().inflate(R.layout.song_entry, null);
+            TextView songTitleTextView = view.findViewById(R.id.song_title);
+            TextView artistTextView = view.findViewById(R.id.artist_title);
+            TextView albumTextView = view.findViewById(R.id.album_title);
+
+            songTitleTextView.setText("Title");
+            artistTextView.setText("Artist");
+            albumTextView.setText("Album");
 
             return view;
         }
