@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.mpatric.mp3agic.BaseException;
 import com.mpatric.mp3agic.BufferTools;
@@ -20,7 +22,7 @@ import com.mpatric.mp3agic.Version;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ArtistViewFragment extends Fragment {
+public class ArtistViewFragment extends LibraryMenuFragment {
 
     private ArrayList<String> artists = new ArrayList<String>();
     private ArrayList<Integer> images = new ArrayList<Integer>();
@@ -48,6 +50,15 @@ public class ArtistViewFragment extends Fragment {
         images.add(R.drawable.testband2);
 
         View view = inflater.inflate(R.layout.fragment_artist_view, container, false);
+
+
+        ImageButton back_button = view.findViewById(R.id.back_arrow);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().popBackStack();
+            }
+        });
 
         gridLayoutManager = new GridLayoutManager(this.getActivity(), 2);
 

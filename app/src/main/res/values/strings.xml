@@ -4,6 +4,6 @@
     <string name="nav_library">Library</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_page">Application by\nRyan Kildea</string>
+    <string name="imp">Import</string>
 </resources>

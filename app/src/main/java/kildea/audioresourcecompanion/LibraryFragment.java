@@ -1,7 +1,6 @@
 package kildea.audioresourcecompanion;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -13,15 +12,17 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class LibraryFragment extends Fragment {
 
-    int[] IMAGES = {R.drawable.person, R.drawable.album, R.drawable.music_note};
-    String[] CATEGORIES = {"Artists", "Albums", "Songs"};
-    Fragment[] CATEGORY_FRAGMENTS = {new ArtistViewFragment(), new ArtistViewFragment(), new SongViewFragment()};
+    private int[] IMAGES = {R.drawable.person, R.drawable.album, R.drawable.music_note};
+    private String[] CATEGORIES = {"Artists", "Albums", "Songs"};
+    private ArrayList<Fragment>  category_fragments = new ArrayList<>();
 
     public LibraryFragment() {
     }
@@ -32,10 +33,18 @@ public class LibraryFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_library, container, false);
+
+        ArtistViewFragment artist_view = new ArtistViewFragment();
+        SongViewFragment song_view = new SongViewFragment();
+        category_fragments.add(artist_view);
+        category_fragments.add(song_view);
+        category_fragments.add(song_view);
+
         ListView libraryActionList = view.findViewById(R.id.library_action_list);
         CustomAdapter customAdapter = new CustomAdapter();
 
         libraryActionList.setAdapter(customAdapter);
+
         // Inflate the layout for this fragment
         return view;
     }
@@ -71,7 +80,8 @@ public class LibraryFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.main_frame, CATEGORY_FRAGMENTS[position]);
+                    fragmentTransaction.replace(R.id.main_frame, category_fragments.get(position));
+                    fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
             });

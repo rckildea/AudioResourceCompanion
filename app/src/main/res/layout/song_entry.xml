@@ -12,7 +12,7 @@
         android:textColor="@color/white"
         android:scrollHorizontally="true"
         android:ellipsize="end"
-        android:maxLines="1"/>
+        android:maxLines="1" />
     <TextView
         android:id="@+id/artist_title"
         android:layout_width="0dp"
@@ -22,7 +22,7 @@
         android:textColor="@color/white"
         android:scrollHorizontally="true"
         android:ellipsize="end"
-        android:maxLines="1"/>
+        android:maxLines="1" />
     <TextView
         android:id="@+id/album_title"
         android:layout_width="0dp"
@@ -32,6 +32,6 @@
         android:textColor="@color/white"
         android:scrollHorizontally="true"
         android:ellipsize="end"
-        android:maxLines="1"/>
+        android:maxLines="1" />
 
 </LinearLayout>

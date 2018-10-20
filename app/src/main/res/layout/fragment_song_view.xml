@@ -3,18 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SongViewFragment">
+
+    <include layout="@layout/library_toolbar"
+        android:id="@+id/library_toolbar"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed" />
 
     <ListView
         android:id="@+id/column_headers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape" />
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:dividerHeight="12dp"
+        android:layout_below="@+id/library_toolbar"
+        />
+
+    <View
+        android:id="@+id/column_headers_separator"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_below="@+id/column_headers"
+        android:background="@color/colorSecondaryShadow"/>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/song_list"
-        android:layout_below="@+id/column_headers"/>
+        android:layout_below="@+id/column_headers_separator"
+        android:divider="@drawable/separator_line"
+        android:paddingTop="10dp"
+        android:dividerHeight="20dp"/>
 
 </RelativeLayout>

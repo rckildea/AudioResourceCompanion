@@ -1,10 +1,12 @@
 package kildea.audioresourcecompanion;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 public class Album {
 
+    private Set<Song> songs;
+
     public Album() {
-        ArrayList<Song> songs;
+
     }
 }
