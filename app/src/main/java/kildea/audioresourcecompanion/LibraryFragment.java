@@ -1,7 +1,9 @@
 package kildea.audioresourcecompanion;
 
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -24,9 +26,15 @@ public class LibraryFragment extends Fragment {
     private String[] CATEGORIES = {"Artists", "Albums", "Songs"};
     private ArrayList<Fragment>  category_fragments = new ArrayList<>();
 
+    private CustomFragmentManager cfm;
+
     public LibraryFragment() {
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +55,16 @@ public class LibraryFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            cfm = (CustomFragmentManager) context;
+        } catch (ClassCastException castException) {
+            /** The activity does not implement the listener. */
+        }
     }
 
 
@@ -79,10 +97,7 @@ public class LibraryFragment extends Fragment {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.main_frame, category_fragments.get(position));
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
+                    cfm.setActiveFragment(category_fragments.get(position), CATEGORIES[position]);
                 }
             });
 

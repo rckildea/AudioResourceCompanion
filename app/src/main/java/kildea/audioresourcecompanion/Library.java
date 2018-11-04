@@ -38,6 +38,12 @@ public class Library {
 
         File[] music_files = music_folder.listFiles();
 
+        fill_library(music_files);
+
+        Log.d("mp3s", "number of files: " + collection.size());
+    }
+
+    private void fill_library(File[] music_files) {
         for (File f : music_files) {
             if (FilenameUtils.getExtension(f.getPath()).equalsIgnoreCase("mp3")) {
                 try {
@@ -57,8 +63,6 @@ public class Library {
                 }
             }
         }
-
-        Log.d("mp3s", "number of files: "+collection.size());
     }
 
     // mp3agic does not allow you to save an MP3 file with its original file name, so this is the crummy workaround
@@ -135,7 +139,7 @@ public class Library {
         return tag;
     }
 
-    public ArrayList<Artist> getLibrary() {
-        return new ArrayList<Artist>();
+    public Set<Artist> getLibrary() {
+        return artists;
     }
 }

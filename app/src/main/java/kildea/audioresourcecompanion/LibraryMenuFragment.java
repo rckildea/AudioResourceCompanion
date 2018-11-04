@@ -1,5 +1,5 @@
 package kildea.audioresourcecompanion;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,8 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import static android.app.Activity.RESULT_OK;
 
 public abstract class LibraryMenuFragment extends Fragment implements View.OnClickListener {
+
+    private final int REQUEST_CODE_PICK_DIR = 1;
+    private final int REQUEST_CODE_PICK_FILE = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,7 +38,20 @@ public abstract class LibraryMenuFragment extends Fragment implements View.OnCli
         switch (v.getId()) {
 
             case R.id.import_item:
-                System.out.print("abcdefg");
+                Intent fileExploreIntent = new Intent(
+                        FileBrowserActivity.INTENT_ACTION_SELECT_DIR,
+                        null,
+                        this.getActivity(),
+                        FileBrowserActivity.class
+                );
+//  fileExploreIntent.putExtra(
+//  	ua.com.vassiliev.androidfilebrowser.FileBrowserActivity.startDirectoryParameter,
+//      "/sdcard"
+//  );//Here you can add optional start directory parameter, and file browser will start from that directory.
+                startActivityForResult(
+                        fileExploreIntent,
+                        REQUEST_CODE_PICK_DIR
+                );
                 break;
 
             case R.id.back_arrow:
@@ -42,5 +61,29 @@ public abstract class LibraryMenuFragment extends Fragment implements View.OnCli
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_PICK_DIR) {
+            if (resultCode == RESULT_OK) {
+                Log.d("abc", "Okay");
+
+            } else {
+                Log.d("abc", "No");
+            }
+        }
+
+        if (requestCode == REQUEST_CODE_PICK_FILE) {
+            if(resultCode == RESULT_OK) {
+                Log.d("abc", "Okay");
+            } else {//if(resultCode == this.RESULT_OK) {
+                Log.d("abc", "No");
+            }
+        }
+
+
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

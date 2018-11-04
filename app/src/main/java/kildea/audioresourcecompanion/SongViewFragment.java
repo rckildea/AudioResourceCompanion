@@ -19,10 +19,7 @@ import java.util.ArrayList;
 
 public class SongViewFragment extends LibraryMenuFragment {
 
-    AudioHandler ah = new AudioHandler();
-
     private ArrayList<Mp3File> songs = new ArrayList<>();
-    MediaPlayer mediaPlayer = new MediaPlayer();
 
     public SongViewFragment() {
         // Required empty public constructor
@@ -80,7 +77,7 @@ public class SongViewFragment extends LibraryMenuFragment {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ah.playTrack(songs.get(position));
+                    MainActivity.ah.playTrack(songs.get(position));
                 }
             });
 
