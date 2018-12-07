@@ -9,12 +9,17 @@ import java.io.IOException;
 public class AudioHandler {
 
     private MediaPlayer mediaPlayer;
+    private Mp3File current_track = null;
 
-    public void playTrack(Mp3File mp3) {
-        stopAudio();
+    public void setTrack(Mp3File mp3) {
+        current_track = mp3;
+        playMusic();
+    }
+
+    public void playMusic() {
+        stopMusic();
         try {
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(mp3.getFilename());
+            mediaPlayer.setDataSource(current_track.getFilename());
             mediaPlayer.prepare();
             mediaPlayer.start();
         } catch (IOException e) {
@@ -24,16 +29,20 @@ public class AudioHandler {
         }
     }
 
-    private void stopAudio() {
+    public void stopMusic() {
         try {
             if (mediaPlayer != null) {
                 if (mediaPlayer.isPlaying())
                     mediaPlayer.stop();
                 mediaPlayer.release();
-                mediaPlayer = null;
             }
+            mediaPlayer = new MediaPlayer();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean isPlaying() {
+        return mediaPlayer.isPlaying();
     }
 }

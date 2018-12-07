@@ -1,1 +1,1 @@
-include ':app', ':mp3agic'
+include ':app', ':mp3agic', ':spotify-app-remote-release-0.6.0', ':spotify-android-auth'

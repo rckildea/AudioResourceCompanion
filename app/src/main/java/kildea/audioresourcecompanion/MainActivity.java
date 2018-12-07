@@ -1,5 +1,6 @@
 package kildea.audioresourcecompanion;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements CustomFragmentMan
 
     protected static Library library;
     protected static AudioHandler ah = new AudioHandler();
+    protected SpotifyHandler spotifyHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements CustomFragmentMan
         homeFragment = new HomeFragment();
         setActiveFragment(homeFragment, "Home"); // Set initial screen to home screen
 
-        //save_test();
+        spotifyHandler = new SpotifyHandler(this);
 
         mainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -51,6 +54,23 @@ public class MainActivity extends AppCompatActivity implements CustomFragmentMan
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        spotifyHandler.connect(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        spotifyHandler.disconnect();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        spotifyHandler.getRequestResults(requestCode, resultCode, intent);
     }
 
     public FrameLayout getMainFrame() {
@@ -72,33 +92,4 @@ public class MainActivity extends AppCompatActivity implements CustomFragmentMan
         fragmentTransaction.commit();
 
     }
-
-    /*public void save_test() {
-        String text = "abcdefgh";
-        FileOutputStream fos = null;
-        File abc = new File("abc.txt");
-        if (!abc.exists()) {
-            try {
-                abc.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        try {
-            fos = openFileOutput("abc.txt", MODE_PRIVATE);
-            fos.write(text.getBytes());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }*/
 }

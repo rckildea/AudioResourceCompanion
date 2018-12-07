@@ -98,6 +98,9 @@ public class LibraryFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     cfm.setActiveFragment(category_fragments.get(position), CATEGORIES[position]);
+                    if (position == 2) {
+                        cfm.setActiveFragment(new AudioControlsFragment(), "Audio Controls");
+                    }
                 }
             });
 

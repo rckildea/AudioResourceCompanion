@@ -77,7 +77,7 @@ public class SongViewFragment extends LibraryMenuFragment {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.ah.playTrack(songs.get(position));
+                    MainActivity.ah.setTrack(songs.get(position));
                 }
             });
 
